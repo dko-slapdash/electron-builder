@@ -63,10 +63,11 @@ Please note — Gatekeeper only recognises [Apple digital certificates](http://s
    * `3rd Party Mac Developer Application:` and `3rd Party Mac Developer Installer:` to sign app for MAS (Mac App Store).
    * `Developer ID Application:` and `Developer ID Installer` to sign app and installer for distribution outside of the Mac App Store.
    * `Mac Developer:` to sign development builds for testing Mac App Store submissions (`mas-dev` target). You also need a provisioning profile in the working directory that matches this certificate and the device being used for testing.
+4. Don't forget to also select the private key corresponding to the selected certificate(s); you should have it as the macOS certificate creation process creates it too. To make the signing process work, the private key must be included into *.p12 bundle, having just the certificates is not enough.
 
    Please note – you can select as many certificates as needed. No restrictions on electron-builder side.
    All selected certificates will be imported into temporary keychain on CI server.
-4. Open context menu and `Export`.
+5. Open context menu and `Export`. Make sure you're exporting to *.p12 format (this is possible when you select a private key along with the cerificates). Provide a secure password to protect your *.p12 file (you'll use it later in `CSC_KEY_PASSWORD` environment variable).
 
 ## How to Disable Code Signing During the Build Process on macOS
 
